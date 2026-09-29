@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آقا ملکی | به زودی</title>
+    
+    <!-- فونت‌های رایگان گوگل -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&family=Righteous&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0f1729;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* ============ شعاع‌های نور چرخان ============ */
+        .rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200vmax;
+            height: 200vmax;
+            transform: translate(-50%, -50%);
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(255, 183, 77, 0.07) 15deg,
+                transparent 30deg,
+                transparent 45deg,
+                rgba(129, 212, 250, 0.06) 60deg,
+                transparent 75deg,
+                transparent 90deg,
+                rgba(255, 138, 128, 0.07) 105deg,
+                transparent 120deg,
+                transparent 135deg,
+                rgba(255, 183, 77, 0.07) 150deg,
+                transparent 165deg,
+                transparent 180deg,
+                rgba(129, 212, 250, 0.06) 195deg,
+                transparent 210deg,
+                transparent 225deg,
+                rgba(255, 138, 128, 0.07) 240deg,
+                transparent 255deg,
+                transparent 270deg,
+                rgba(255, 183, 77, 0.07) 285deg,
+                transparent 300deg,
+                transparent 315deg,
+                rgba(129, 212, 250, 0.06) 330deg,
+                transparent 345deg,
+                transparent 360deg
+            );
+            animation: rotateRays 40s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes rotateRays {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* ============ ذرات شناور ============ */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: riseUp linear infinite;
+        }
+        
+        .particle:nth-child(1) { left: 5%;  width: 6px;  height: 6px;  background: #ffb74d; animation-duration: 14s; animation-delay: 0s;   box-shadow: 0 0 12px #ffb74d; }
+        .particle:nth-child(2) { left: 15%; width: 4px;  height: 4px;  background: #81d4fa; animation-duration: 18s; animation-delay: 2s;   box-shadow: 0 0 10px #81d4fa; }
+        .particle:nth-child(3) { left: 25%; width: 8px;  height: 8px;  background: #ff8a80; animation-duration: 12s; animation-delay: 4s;   box-shadow: 0 0 15px #ff8a80; }
+        .particle:nth-child(4) { left: 38%; width: 5px;  height: 5px;  background: #ffb74d; animation-duration: 16s; animation-delay: 1s;   box-shadow: 0 0 12px #ffb74d; }
+        .particle:nth-child(5) { left: 50%; width: 7px;  height: 7px;  background: #81d4fa; animation-duration: 20s; animation-delay: 6s;   box-shadow: 0 0 14px #81d4fa; }
+        .particle:nth-child(6) { left: 62%; width: 4px;  height: 4px;  background: #ff8a80; animation-duration: 13s; animation-delay: 3s;   box-shadow: 0 0 10px #ff8a80; }
+        .particle:nth-child(7) { left: 75%; width: 9px;  height: 9px;  background: #ffb74d; animation-duration: 17s; animation-delay: 5s;   box-shadow: 0 0 16px #ffb74d; }
+        .particle:nth-child(8) { left: 85%; width: 5px;  height: 5px;  background: #81d4fa; animation-duration: 15s; animation-delay: 7s;   box-shadow: 0 0 12px #81d4fa; }
+        .particle:nth-child(9) { left: 92%; width: 6px;  height: 6px;  background: #ff8a80; animation-duration: 19s; animation-delay: 2.5s; box-shadow: 0 0 13px #ff8a80; }
+        .particle:nth-child(10){ left: 45%; width: 3px;  height: 3px;  background: #ffb74d; animation-duration: 11s; animation-delay: 8s;   box-shadow: 0 0 9px #ffb74d; }
+        
+        @keyframes riseUp {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) scale(1);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(0.5);
+                opacity: 0;
+            }
+        }
+        
+        /* ============ هاله‌های رنگی پشت متن ============ */
+        .glow-orange,
+        .glow-red {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(130px);
+            z-index: 1;
+            animation: breathe 6s ease-in-out infinite;
+        }
+        
+        .glow-orange {
+            width: 500px;
+            height: 500px;
+            background: #ffb74d;
+            opacity: 0.3;
+            top: 20%;
+            right: 10%;
+        }
+        
+        .glow-red {
+            width: 550px;
+            height: 550px;
+            background: #81d4fa;
+            opacity: 0.25;
+            bottom: 10%;
+            left: 5%;
+            animation-delay: -3s;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.25; }
+            50% { transform: scale(1.15); opacity: 0.4; }
+        }
+        
+        /* ============ محتوای اصلی ============ */
+        .coming-soon-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* برچسب بالای متن */
+        .badge {
+            font-family: 'Righteous', Arial, sans-serif;
+            font-weight: 400;
+            font-size: clamp(0.7rem, 1.6vw, 1rem);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #ffb74d;
+            margin-bottom: 25px;
+            padding: 10px 25px;
+            border: 2px solid #ffb74d;
+            border-radius: 50px;
+            background: rgba(255, 183, 77, 0.1);
+            box-shadow: 0 0 25px rgba(255, 183, 77, 0.4), inset 0 0 15px rgba(255, 183, 77, 0.15);
+            animation: badgePulse 2.5s ease-in-out infinite;
+        }
+        
+        @keyframes badgePulse {
+            0%, 100% { 
+                box-shadow: 0 0 25px rgba(255, 183, 77, 0.4), inset 0 0 15px rgba(255, 183, 77, 0.15);
+                border-color: #ffb74d;
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(129, 212, 250, 0.5), inset 0 0 25px rgba(129, 212, 250, 0.2);
+                border-color: #81d4fa;
+            }
+        }
+        
+        /* ============ متن خمیری "به زودی" ============ */
+        .coming-soon-text {
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            font-weight: 900;
+            font-size: clamp(3.5rem, 13vw, 9rem);
+            line-height: 1.1;
+            margin-bottom: 10px;
+            /* رنگ جدید: کهربایی درخشان با کنتراست بالا */
+            color: #fbbf24;
+            letter-spacing: 0.03em;
+            position: relative;
+            
+            -webkit-text-stroke: 8px #0a0f1c;
+            paint-order: stroke fill;
+            text-shadow:
+                0 0 10px #f59e0b,
+                0 0 30px #fbbf24,
+                0 2px 0 #b45309,
+                0 4px 6px rgba(0, 0, 0, 0.5),
+                0 8px 20px rgba(0, 0, 0, 0.6),
+                0 12px 35px rgba(251, 191, 36, 0.6);
+        }
+        
+        /* نقطه‌ها */
+        .dots {
+            display: inline-block;
+            color: #fbbf24;
+            -webkit-text-stroke: 8px #0a0f1c;
+            paint-order: stroke fill;
+            text-shadow:
+                0 0 10px #f59e0b,
+                0 0 30px #fbbf24,
+                0 2px 0 #b45309,
+                0 4px 6px rgba(0, 0, 0, 0.5),
+                0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+        
+        .dots span {
+            display: inline-block;
+            animation: dotBounce 1.5s ease-in-out infinite;
+        }
+        
+        .dots span:nth-child(1) { animation-delay: 0s; }
+        .dots span:nth-child(2) { animation-delay: 0.2s; }
+        .dots span:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes dotBounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-22px); }
+        }
+        
+        /* خط جداکننده */
+        .divider {
+            width: 250px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffb74d 20%, #fbbf24 50%, #81d4fa 80%, transparent);
+            border-radius: 2px;
+            margin: 30px 0;
+            box-shadow: 0 0 25px rgba(251, 191, 36, 0.8);
+            animation: expandWidth 1.5s ease-out;
+        }
+        
+        @keyframes expandWidth {
+            from { width: 0; opacity: 0; }
+            to { width: 250px; opacity: 1; }
+        }
+        
+        /* ============ آدرس سایت خمیری ============ */
+        .site-url {
+            font-family: 'Righteous', Arial, sans-serif;
+            font-weight: 400;
+            font-size: clamp(1.4rem, 4.5vw, 2.8rem);
+            /* رنگ جدید: فیروزه‌ای روشن با درخشش */
+            color: #22d3ee;
+            letter-spacing: 0.1em;
+            direction: ltr;
+            text-transform: lowercase;
+            position: relative;
+            padding: 8px 20px;
+            
+            -webkit-text-stroke: 6px #0a0f1c;
+            paint-order: stroke fill;
+            text-shadow:
+                0 0 15px #06b6d4,
+                0 0 40px #22d3ee,
+                0 2px 0 #0891b2,
+                0 4px 6px rgba(0, 0, 0, 0.5),
+                0 8px 20px rgba(0, 0, 0, 0.6),
+                0 12px 30px rgba(34, 211, 238, 0.5);
+        }
+        
+        /* واکنش‌گرا برای موبایل */
+        @media (max-width: 600px) {
+            .coming-soon-text {
+                -webkit-text-stroke: 5px #0a0f1c;
+            }
+            
+            .dots {
+                -webkit-text-stroke: 5px #0a0f1c;
+            }
+            
+            .site-url {
+                -webkit-text-stroke: 4px #0a0f1c;
+            }
+            
+            .divider { width: 160px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- شعاع‌های نور چرخان -->
+    <div class="rays"></div>
+    
+    <!-- هاله‌های رنگی -->
+    <div class="glow-orange"></div>
+    <div class="glow-red"></div>
+    
+    <!-- ذرات شناور -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <!-- محتوای اصلی -->
+    <div class="coming-soon-wrapper">
+        <div class="badge">Coming Soon</div>
+        
+        <h1 class="coming-soon-text">
+            به زودی
+            <span class="dots">
+                <span>.</span><span>.</span><span>.</span>
+            </span>
+        </h1>
+        
+        <div class="divider"></div>
+        
+        <div class="site-url">Aghamaleki.ir</div>
+    </div>
+</body>
+</html>
